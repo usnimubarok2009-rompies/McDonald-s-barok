@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McDonald's | dekat RS. Pelni Jakarta Barat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --mcd-red: #DA291C;
+            --mcd-yellow: #FFC72C;
+            --mcd-dark: #27251F;
+            --mcd-light: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background-color: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--mcd-red);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span {
+            color: var(--mcd-yellow);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--mcd-yellow);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(39, 37, 31, 0.85), rgba(39, 37, 31, 0.9)), url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.0.3&auto=format&fit=crop&w=1472&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--mcd-yellow);
+            color: var(--mcd-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 199, 44, 0.3);
+            margin: 0.5rem;
+        }
+        
+        .cta-button:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 199, 44, 0.5);
+        }
+        
+        /* Location */
+        .location {
+            background-color: var(--mcd-light);
+            padding: 3rem 0;
+        }
+        
+        .location h2 {
+            color: var(--mcd-red);
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+        
+        .location-info {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .map-icon {
+            background-color: var(--mcd-red);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        /* Menu Section */
+        .menu {
+            padding: 4rem 0;
+        }
+        
+        .menu h2 {
+            color: var(--mcd-red);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+        }
+        
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .category-btn {
+            background-color: white;
+            border: 2px solid #eee;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background-color: var(--mcd-red);
+            color: white;
+            border-color: var(--mcd-red);
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .menu-img {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .menu-content {
+            padding: 1.5rem;
+        }
+        
+        .menu-content h3 {
+            color: var(--mcd-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .menu-desc {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            min-height: 60px;
+        }
+        
+        .menu-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .price {
+            color: var(--mcd-red);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        
+        .order-btn {
+            background-color: var(--mcd-yellow);
+            color: var(--mcd-dark);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .order-btn:hover {
+            background-color: #ffb900;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--mcd-dark);
+            color: white;
+            padding: 4rem 0;
+        }
+        
+        .contact h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            color: var(--mcd-yellow);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--mcd-yellow);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            color: var(--mcd-red);
+            border-radius: 50%;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--mcd-yellow);
+            transform: translateY(-3px);
+        }
+        
+        .social-link.wa {
+            background-color: #25D366;
+            color: white;
+        }
+        
+        .social-link.ig {
+            background: linear-gradient(45deg, #405DE6, #E1306C, #F77737);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--mcd-red);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .social-handle {
+            font-weight: 600;
+            color: var(--mcd-yellow);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .location-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-hamburger" style="font-size: 2rem; color: var(--mcd-yellow);"></i>
+                    <h1>Mc<span>Donald's</span></h1>
+                </div>
+                <nav class="nav-links">
+                    <a href="#home">Beranda</a>
+                    <a href="#menu">Menu</a>
+                    <a href="#location">Lokasi</a>
+                    <a href="#contact">Pesan Online</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>McDonald's UMKM Jakarta Barat</h2>
+            <p>Rasa ikonik McDonald's dengan harga UMKM yang terjangkau. Lokasi strategis di dekat RS. Pelni Jakarta Barat</p>
+            <a href="#menu" class="cta-button">LIHAT MENU</a>
+            <a href="#contact" class="cta-button">PESAN SEKARANG</a>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="location">
+        <div class="container">
+            <h2>Lokasi Kami</h2>
+            <div class="location-info">
+                <div class="map-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                    <h3>McDonald's dekat RS. Pelni Jakarta Barat</h3>
+                    <p>📍 Lokasi strategis di area RS. Pelni Jakarta Barat, mudah diakses dari berbagai daerah</p>
+                    <p>🕒 Buka setiap hari: 08:00 - 22:00 WIB</p>
+                    <p>🚗 Tersedia area parkir terbatas</p>
+                    <p>🚚 Layanan delivery untuk area sekitar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2>Menu McDonald's UMKM</h2>
+            
+            <div class="menu-categories">
+                <button class="category-btn active" onclick="filterMenu('all')">Semua Menu</button>
+                <button class="category-btn" onclick="filterMenu('burger')">Burger</button>
+                <button class="category-btn" onclick="filterMenu('ayam')">Ayam</button>
+                <button class="category-btn" onclick="filterMenu('paket')">Paket</button>
+                <button class="category-btn" onclick="filterMenu('minuman')">Minuman & Dessert</button>
+            </div>
+            
+            <div class="menu-grid" id="menu-container">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Pesan Sekarang</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp Order</h3>
+                    <p>Pesan via WhatsApp untuk cepat dan mudah</p>
+                    <a href="https://wa.me/628987626842?text=Halo%20McDonald's,%20saya%20mau%20pesan" class="cta-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> 0898-7626-842
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3>Instagram</h3>
+                    <p>Follow dan pesan via Instagram kami</p>
+                    <a href="https://instagram.com/usnirompies1990" class="cta-button" target="_blank">
+                        <i class="fab fa-instagram"></i> @usnirompies1990
+                    </a>
+                    <div class="social-handle" style="margin-top: 15px;">
+                        <i class="fas fa-hashtag"></i> Follow juga: @mcd_goldenarches_jakarta
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Telepon Langsung</h3>
+                    <p>Untuk reservasi dan pertanyaan</p>
+                    <a href="tel:08987626842" class="cta-button">
+                        <i class="fas fa-phone"></i> 0898-7626-842
+                    </a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <h3 style="color: var(--mcd-yellow); margin-bottom: 1rem;">Ikuti Media Sosial Kami</h3>
+                <div class="social-links">
+                    <a href="https://wa.me/628987626842" class="social-link wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://instagram.com/usnirompies1990" class="social-link ig" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <i class="fas fa-hamburger" style="color: var(--mcd-yellow);"></i>
+                    <h2 style="color: white;">Mc<span>Donald's</span></h2>
+                </div>
+                <div>
+                    <p>UMKM McDonald's Jakarta Barat | dekat RS. Pelni</p>
+                    <p>© 2024 McDonald's UMKM. All rights reserved.</p>
+                </div>
+                <div class="social-handle">
+                    Instagram: @mcd_goldenarches_jakarta
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Data
+        const menuItems = [
+            {
+                id: 1,
+                name: "Big Mac",
+                category: "burger",
+                price: "Rp 45.000",
+                description: "Dua patty daging sapi, saus spesial, selada, keju, acar, bawang, di dalam roti bertingkat tiga.",
+                image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 2,
+                name: "Cheeseburger",
+                category: "burger",
+                price: "Rp 25.000",
+                description: "Roti klasik dengan daging sapi, keju leleh, acar, bawang, mustard, dan saus tomat.",
+                image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 3,
+                name: "Chicken Burger",
+                category: "burger",
+                price: "Rp 28.000",
+                description: "Fillet ayam gurih dengan selada segar dan saus mayones spesial.",
+                image: "https://images.unsplash.com/photo-1603064752734-4c48eff53d05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 4,
+                name: "2 Pcs McD Chicken",
+                category: "ayam",
+                price: "Rp 38.000",
+                description: "Paha dan sayap ayam dengan tepung spesial pilihan, crispy atau spicy.",
+                image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 5,
+                name: "5 Pcs Chicken Nugget",
+                category: "ayam",
+                price: "Rp 25.000",
+                description: "Potongan daging ayam pilihan dengan baluran tepung yang crispy.",
+                image: "https://images.unsplash.com/photo-1599580420600-3817c6219d88?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 6,
+                name: "Paket Big Mac",
+                category: "paket",
+                price: "Rp 65.000",
+                description: "Big Mac + Kentang Regular + Minuman Soft Drink pilihan.",
+                image: "https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 7,
+                name: "Paket 2 Pcs McD Chicken",
+                category: "paket",
+                price: "Rp 60.000",
+                description: "2 Pcs Ayam + Kentang Regular + Minuman Soft Drink pilihan.",
+                image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 8,
+                name: "Happy Meal",
+                category: "paket",
+                price: "Rp 35.000",
+                description: "Untuk anak: 1 Main Course, 1 Side, 1 Minuman, 1 Mainan edukatif.",
+                image: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 9,
+                name: "Kentang Goreng",
+                category: "paket",
+                price: "Rp 20.000",
+                description: "Kentang goreng renyah khas McDonald's, tersedia ukuran regular.",
+                image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 10,
+                name: "Coca-Cola",
+                category: "minuman",
+                price: "Rp 15.000",
+                description: "Minuman bersoda kesukaan semua orang, tersedia es atau tanpa es.",
+                image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 11,
+                name: "McFlurry Oreo",
+                category: "minuman",
+                price: "Rp 30.000",
+                description: "Ice cream lembut dengan potongan biskuit Oreo yang lezat.",
+                image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 12,
+                name: "Apple Pie",
+                category: "minuman",
+                price: "Rp 18.000",
+                description: "Pie panggang dengan isi apel manis-cinnamon yang hangat.",
+                image: "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            }
+        ];
+
+        // Initialize menu
+        document.addEventListener('DOMContentLoaded', function() {
+            displayMenu('all');
+            
+            // Set active category button
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        // Filter menu by category
+        function filterMenu(category) {
+            displayMenu(category);
+        }
+
+        // Display menu items
+        function displayMenu(category) {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = '';
+            
+            const filteredItems = category === 'all' 
+                ? menuItems 
+                : menuItems.filter(item => item.category === category);
+            
+            filteredItems.forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.className = 'menu-item';
+                menuItem.innerHTML = `
+                    <div class="menu-img" style="background-image: url('${item.image}')"></div>
+                    <div class="menu-content">
+                        <h3>${item.name}</h3>
+                        <p class="menu-desc">${item.description}</p>
+                        <div class="menu-price">
+                            <span class="price">${item.price}</span>
+                            <button class="order-btn" onclick="orderItem('${item.name}')">
+                                <i class="fas fa-shopping-cart"></i> Pesan
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(menuItem);
+            });
+        }
+
+        // Order function
+        function orderItem(itemName) {
+            const message = `Halo McDonald's, saya mau pesan ${itemName}. Bisa info detailnya?`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/628987626842?text=${encodedMessage}`, '_blank');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
